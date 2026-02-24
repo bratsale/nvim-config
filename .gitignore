@@ -1,0 +1,6 @@
+.netrwhist
+undo/
+backups/
+swaps/
+# Ako ne želiš da dijeliš listu instaliranih pluginova (opciono)
+# lazy-lock.json

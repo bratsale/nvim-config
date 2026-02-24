@@ -1,0 +1,1 @@
+/home/sasa/.config/omarchy/current/theme/neovim.lua
