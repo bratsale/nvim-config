@@ -1,0 +1,266 @@
+================================================================================
+                     ARCH / OMARCHY LINUX - TERMINAL CHEAT SHEET
+================================================================================
+
+--------------------------------------------------------------------------------
+ NAVIGACIJA PO SISTEMU
+--------------------------------------------------------------------------------
+
+  pwd                        Prikazi trenutni direktorij
+  ls                         Listaj fajlove u trenutnom direktoriju
+  ls -la                     Listaj sve fajlove (ukljucujuci skrivene) s detaljima
+  ls -lh                     Listaj s citljivim velicinama (KB, MB...)
+  cd ime_direktorija         Udi u direktorij
+  cd ..                      Idi jedan nivo gore
+  cd ~                       Idi u home direktorij
+  cd -                       Idi u prethodni direktorij
+  tree                       Prikazi strukturu direktorija (stablo)
+  tree -L 2                  Stablo do dubine 2 nivoa
+
+--------------------------------------------------------------------------------
+ UPRAVLJANJE FAJLOVIMA I DIREKTORIJIMA
+--------------------------------------------------------------------------------
+
+  touch ime_fajla            Kreiraj prazan fajl
+  mkdir ime_direktorija      Kreiraj novi direktorij
+  mkdir -p put/do/dir        Kreiraj direktorij s cijelim putanjom
+  cp source destination      Kopiraj fajl
+  cp -r source/ destination/ Kopiraj cijeli direktorij
+  mv source destination      Premjesti / preimenuj fajl
+  rm ime_fajla               Obrisi fajl
+  rm -r ime_direktorija      Obrisi direktorij i sadrzaj
+  rm -rf ime_direktorija     Obrisi bez pitanja (oprezno!)
+  rmdir ime_direktorija      Obrisi PRAZAN direktorij
+  ln -s /putanja/do/fajla link_ime   Kreiraj simbolicki link
+
+--------------------------------------------------------------------------------
+ CITANJE I PREGLED FAJLOVA
+--------------------------------------------------------------------------------
+
+  cat fajl.txt               Ispisi cijeli fajl
+  cat -n fajl.txt            Ispisi s brojevima linija
+  less fajl.txt              Otvori fajl za citanje (q = izlaz)
+  more fajl.txt              Stariji pager (space = dalje, q = izlaz)
+  head fajl.txt              Prvih 10 linija fajla
+  head -n 20 fajl.txt        Prvih 20 linija fajla
+  tail fajl.txt              Posljednjih 10 linija fajla
+  tail -n 20 fajl.txt        Posljednjih 20 linija fajla
+  tail -f fajl.txt           Prati fajl u realnom vremenu (log watch)
+  nano fajl.txt              Uredi fajl u nano editoru
+  vim fajl.txt               Uredi fajl u vim editoru
+  file ime_fajla             Prikazi tip fajla
+
+--------------------------------------------------------------------------------
+ TRAZENJE
+--------------------------------------------------------------------------------
+
+  find . -name "ime.txt"     Trazi fajl po imenu od trenutnog direktorija
+  find / -name "*.conf"      Trazi sve .conf fajlove na sistemu
+  find . -type d             Trazi samo direktorije
+  find . -type f             Trazi samo fajlove
+  grep "tekst" fajl.txt      Trazi tekst unutar fajla
+  grep -r "tekst" ./         Trazi tekst u svim fajlovima rekurzivno
+  grep -i "tekst" fajl.txt   Trazi bez razlikovanja velikih/malih slova
+  grep -n "tekst" fajl.txt   Pokazi broj linije uz rezultat
+  which komanda              Pokazi putanju do komande
+  whereis komanda            Pokazi sve putanje vezane za komandu
+  locate ime_fajla           Brza pretraga (treba updatedb baza)
+
+--------------------------------------------------------------------------------
+ PACMAN - UPRAVLJANJE PAKETIMA
+--------------------------------------------------------------------------------
+
+  sudo pacman -Syu           Azuriraj sve pakete
+  sudo pacman -S ime_paketa  Instaliraj paket
+  sudo pacman -R ime_paketa  Ukloni paket
+  sudo pacman -Rs ime_paketa Ukloni paket i njegove zavisnosti
+  sudo pacman -Ss kljucna_rijec   Pretrazi pakete
+  sudo pacman -Q             Listaj instalirane pakete
+  sudo pacman -Qi ime_paketa Info o instaliranom paketu
+  sudo pacman -Ql ime_paketa Listaj fajlove paketa
+  sudo pacman -Sc            Ocisti stari cache
+  sudo pacman -Scc           Ocisti cijeli cache
+
+  # AUR helper (yay ili paru)
+  yay -Syu                   Azuriraj sve (ukljucujuci AUR)
+  yay -S ime_paketa          Instaliraj iz AUR-a
+  paru -S ime_paketa         Alternativa yay-u
+
+--------------------------------------------------------------------------------
+ SISTEMSKE INFORMACIJE
+--------------------------------------------------------------------------------
+
+  uname -a                   Info o kernelu i sistemu
+  hostnamectl                Info o hostu
+  lscpu                      Info o procesoru
+  free -h                    Prikazi upotrebu RAM-a
+  df -h                      Prikazi upotrebu diska
+  du -sh *                   Velicina fajlova/direktorija u trenutnom folderu
+  du -sh /putanja            Velicina specificnog direktorija
+  lsblk                      Listaj blok uredjaje (diskovi, particije)
+  lspci                      Listaj PCI uredjaje
+  lsusb                      Listaj USB uredjaje
+  inxi -F                    Detaljan pregled sistema (treba instalirati)
+  neofetch                   Lijep prikaz sys info (treba instalirati)
+  fastfetch                  Brza verzija neofetch-a
+
+--------------------------------------------------------------------------------
+ PROCESI
+--------------------------------------------------------------------------------
+
+  top                        Monitor procesa (interaktivno)
+  htop                       Bolji monitor procesa (treba instalirati)
+  ps aux                     Listaj sve aktivne procese
+  ps aux | grep ime          Trazi specificni proces
+  kill PID                   Zaustavi proces po ID-u
+  kill -9 PID                Prisilno zaustavi proces
+  killall ime_procesa        Zaustavi sve procese tog imena
+  pkill ime_procesa          Alternativa killall
+  jobs                       Listaj poslove u backgroundu
+  bg                         Posalji job u background
+  fg                         Vrati job u foreground
+  Ctrl + C                   Prekini trenutni proces
+  Ctrl + Z                   Pauziraj trenutni proces
+
+--------------------------------------------------------------------------------
+ MREZNE KOMANDE
+--------------------------------------------------------------------------------
+
+  ip a                       Prikazi IP adrese i interfejse
+  ip r                       Prikazi routing tablicu
+  ping google.com            Testiranje konekcije
+  ping -c 4 google.com       Pingsaj tacno 4 puta
+  ss -tuln                   Aktivni portovi i socketi
+  curl https://url.com       Dohvati sadrzaj URL-a
+  wget https://url.com       Preuzmi fajl s URL-a
+  nslookup domena.com        DNS pretraga
+  dig domena.com             Detaljnija DNS pretraga
+  traceroute google.com      Prati rutu do hosta
+  nmcli                      Network Manager CLI
+  nmtui                      Network Manager TUI (graficki u terminalu)
+
+--------------------------------------------------------------------------------
+ KORISNICI I DOZVOLE
+--------------------------------------------------------------------------------
+
+  whoami                     Trenutni korisnik
+  id                         UID, GID i grupe korisnika
+  su - korisnik              Prebaci se na drugog korisnika
+  sudo komanda               Izvrsi komandu kao root
+  sudo -i                    Uloguj se kao root (oprezno!)
+  passwd                     Promijeni lozinku
+  useradd -m korisnik        Kreiraj novog korisnika
+  userdel -r korisnik        Obrisi korisnika
+  usermod -aG grupa korisnik Dodaj korisnika u grupu
+  groups korisnik            Pokazi grupe korisnika
+
+  # Dozvole fajlova
+  chmod 755 fajl             Postavi dozvole (rwxr-xr-x)
+  chmod +x skripта.sh        Dodaj izvrsne dozvole
+  chmod -R 755 direktorij    Rekurzivno postavi dozvole
+  chown korisnik:grupa fajl  Promijeni vlasnika fajla
+  chown -R korisnik dir/     Rekurzivno promijeni vlasnika
+
+  # Dozvole - brze referenca
+  # 7 = rwx (citanje + pisanje + izvrsavanje)
+  # 6 = rw- (citanje + pisanje)
+  # 5 = r-x (citanje + izvrsavanje)
+  # 4 = r-- (samo citanje)
+
+--------------------------------------------------------------------------------
+ SYSTEMD - UPRAVLJANJE SERVISIMA
+--------------------------------------------------------------------------------
+
+  systemctl status ime       Status servisa
+  systemctl start ime        Pokreni servis
+  systemctl stop ime         Zaustavi servis
+  systemctl restart ime      Restartuj servis
+  systemctl reload ime       Reload konfiguracije
+  systemctl enable ime       Pokreni servis pri bootu
+  systemctl disable ime      Onemogući automatski start
+  systemctl list-units       Listaj sve servise
+  systemctl list-units --failed   Listaj neuspjesne servise
+  journalctl -u ime          Logovi specificnog servisa
+  journalctl -f              Prati logove u realnom vremenu
+  journalctl -xe             Greske i zadnji logovi
+
+--------------------------------------------------------------------------------
+ BASH TRIKOVI I PRECICE
+--------------------------------------------------------------------------------
+
+  Ctrl + A                   Idi na pocetak linije
+  Ctrl + E                   Idi na kraj linije
+  Ctrl + U                   Obrisi sve lijevo od kursora
+  Ctrl + K                   Obrisi sve desno od kursora
+  Ctrl + W                   Obrisi rijec lijevo od kursora
+  Ctrl + R                   Pretrazi historiju komandi
+  Ctrl + L                   Ocisti terminal (isto kao clear)
+  Tab                        Auto-complete
+  Tab Tab                    Prikazi sve mogucnosti auto-complete
+  !!                         Ponovi prethodnu komandu
+  !tekst                     Ponovi prethodnu komandu koja pocinje s 'tekst'
+  history                    Prikazi historiju komandi
+  history | grep komanda     Trazi u historiji
+  !broj                      Izvrsi komandu po broju iz historije
+  komanda &                  Pokreni u backgroundu
+  komanda1 && komanda2       Izvrsi komandu2 samo ako komanda1 uspije
+  komanda1 || komanda2       Izvrsi komandu2 samo ako komanda1 ne uspije
+  komanda1 | komanda2        Pipe - output jedne kao input druge
+
+--------------------------------------------------------------------------------
+ PREUSMJERAVANJE (REDIRECTION)
+--------------------------------------------------------------------------------
+
+  komanda > fajl.txt         Zapisi output u fajl (prepiši)
+  komanda >> fajl.txt        Dodaj output na kraj fajla
+  komanda 2> greske.txt      Zapisi greske u fajl
+  komanda 2>&1               Spoji greske i normalni output
+  komanda > fajl 2>&1        Sve u isti fajl
+  komanda < fajl.txt         Uzmi input iz fajla
+  komanda | tee fajl.txt     Ispisi I na ekran I u fajl istovremeno
+
+--------------------------------------------------------------------------------
+ ARHIVIRANJE I KOMPRESIJA
+--------------------------------------------------------------------------------
+
+  tar -czvf arhiva.tar.gz dir/    Kreiraj .tar.gz arhivu
+  tar -xzvf arhiva.tar.gz         Raspakuj .tar.gz arhivu
+  tar -cjvf arhiva.tar.bz2 dir/   Kreiraj .tar.bz2 arhivu
+  tar -xjvf arhiva.tar.bz2        Raspakuj .tar.bz2 arhivu
+  tar -tf arhiva.tar.gz           Prikazi sadrzaj bez raspakivanja
+  zip -r arhiva.zip dir/          Kreiraj ZIP arhivu
+  unzip arhiva.zip                Raspakuj ZIP arhivu
+  unzip -l arhiva.zip             Listaj sadrzaj ZIP-a
+
+--------------------------------------------------------------------------------
+ BRZE INFORMACIJE
+--------------------------------------------------------------------------------
+
+  man komanda                Manual stranica za komandu
+  komanda --help             Kratka pomoc za komandu
+  tldr komanda               Krace objasnjenje (treba instalirati)
+  date                       Trenutni datum i vrijeme
+  cal                        Prikazi kalendar
+  uptime                     Koliko dugo radi sistem
+  w                          Ko je ulogovan i sta radi
+  last                       Historija loginova
+  alias kk='ls -la'          Kreiraj alias (dodaj u ~/.bashrc ili ~/.zshrc)
+
+================================================================================
+ OMARCHY SPECIFIKE
+================================================================================
+
+  # Omarchy koristi Hyprland kao window manager
+  Super + Return             Otvori terminal
+  Super + Q                  Zatvori prozor
+  Super + broj               Prebaci se na workspace
+  Super + Shift + broj       Premjesti prozor na workspace
+
+  # Konfiguracijski fajlovi
+  ~/.config/hypr/            Hyprland konfiguracija
+  ~/.bashrc ili ~/.zshrc     Shell konfiguracija
+  ~/.config/                 Veci dio app konfiguracija
+
+================================================================================
+                         github.com/milanvarady/omarchy
+================================================================================
